@@ -4,8 +4,8 @@ $nameApp = "wiwiCar";
 
 //action par défaut
 $action = "index";
-$action2 = "menu";
-$action3 = "search";
+$action2 = "search";
+$action3 = "result";
 
 
 
