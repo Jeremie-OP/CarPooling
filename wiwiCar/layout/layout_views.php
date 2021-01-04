@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="css/main.css">
 
     <title>Ton appli !</title>
+
     <div class="container p-0" id="banner">
         <img src="images/header_img.png" class="img-fluid" alt="Une mobilité responsable">
         <img src="images/header_logo.png" class="rounded img-fluid float-left" alt="CERIcar" id="logo">
