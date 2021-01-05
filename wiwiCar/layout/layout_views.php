@@ -14,7 +14,6 @@
 <header>
     <div class="container p-0" id="banner">
         <img src="image/header_img.png" class="img-fluid" alt="Une mobilité responsable">
-        <img src="image/header_logo.png" class="rounded img-fluid" alt="CERIcar" id="logo">
     </div>
     <div class="container p-0 bg-white" id="menu">
         <?php include("wiwiCar/view/menu.php"); ?>
@@ -36,8 +35,7 @@ endif;
         </div>
     <?php endif; ?>
 
-    <div id="notif" class="container text-white" style="display: none">
-    </div>
+    <div id="notif" class="container text-white" style="display: none"></div>
 
     <div id="page_maincontent" class="container" style="background-color:#3399ff">
         <div class="row">
