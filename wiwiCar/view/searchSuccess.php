@@ -25,7 +25,7 @@
             ?>
         </select>
     </div>
-    <button type="submit" class="btn btn-primary" method="get">Submit</button>
+    <button id="submit_search" type="submit" class="btn btn-primary" method="get">Submit</button>
 </form>
 
 
