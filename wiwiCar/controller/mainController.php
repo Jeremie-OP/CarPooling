@@ -12,7 +12,6 @@ class mainController
 
 
 	public static function index($request,$context){
-		
 		return context::SUCCESS;
 	}
 
@@ -56,10 +55,6 @@ class mainController
 	    return $context::ERROR;
     }
 
-    public static function menu($request,$context) {
-        return $context::SUCCESS;
-    }
-
     public static function search($request,$context) {
         $context->tableData = trajetTable::getVilles();
         if (key_exists("depart", $request) && key_exists("arrivee", $request)) {
@@ -84,8 +79,32 @@ class mainController
         }
     }
 
-    public static function notification($request, $context) {
+    public static function inscription($request, $context) {
         return $context::SUCCESS;
+    }
+
+    public static function signup($request, $context) {
+        if (key_exists("login", $request) && key_exists("password", $request)) {
+            if (utilisateurTable::getUserByLogin($request['login'])) {
+                //notification que le login existe déjà
+                return $context::NONE;
+            }
+            else {
+                $user = new utilisateur();
+                $user->nom = $request['nom'];
+                $user->prenom = $request['prenom'];
+                $user->identifiant = $request['login'];
+                $user->pass = $request['password'];
+                $context->user = $user;
+                //$em = dbconnection::getInstance()->getEntityManager();
+                //$em->persist($user);
+                //$em->flush();
+                return $context::SUCCESS;
+            }
+        }
+        else {
+            return $context::ERROR;
+        }
     }
 
 }

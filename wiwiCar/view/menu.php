@@ -1,8 +1,8 @@
 <ul class="nav">
     <li class="nav-item">
-        <a class="nav-link" href="#">Index</a>
+        <a class="btn" href="wiwiCar.php" role="button">Acceuil</a>
     </li>
     <li class="nav-item">
-        <a class="nav-link" href="#">Ajouter</a>
+        <button id="inscription" type="button" class="btn">Inscription</button>
     </li>
 </ul>

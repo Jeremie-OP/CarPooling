@@ -39,6 +39,11 @@ endif;
 
     <div id="page_maincontent" class="container" style="background-color:#3399ff">
         <div class="row">
+            <div id="access" class="col" style="display: none">
+                <?php include($template_view4); ?>
+            </div>
+        </div>
+        <div class="row">
             <div id="search" class="col-md">
                 <?php include($template_view2); ?>
             </div>

@@ -6,6 +6,7 @@ $nameApp = "wiwiCar";
 $action = "index";
 $action2 = "search";
 $action3 = "result";
+$action4 = "inscription";
 
 
 
@@ -26,6 +27,7 @@ $context->init($nameApp);
 $view = $context->executeAction($action, $_REQUEST);
 $view2 = $context->executeAction($action2, $_REQUEST);
 $view3 = $context->executeAction($action3, $_REQUEST);
+$view4 = $context->executeAction($action4, $_REQUEST);
 
 //traitement des erreurs de bases, reste a traiter les erreurs d'inclusion
 if($view===false)
@@ -40,6 +42,7 @@ elseif($view!=context::NONE)
 	$template_view = $nameApp."/view/".$action.$view.".php";
 	$template_view2 = $nameApp."/view/".$action2.$view2.".php";
 	$template_view3 = $nameApp."/view/".$action3.$view3.".php";
+    $template_view4 = $nameApp."/view/".$action4.$view4.".php";
 	include($nameApp."/layout/".$context->getLayout().".php");
 }
 

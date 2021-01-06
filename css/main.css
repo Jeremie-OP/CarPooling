@@ -1,3 +1,7 @@
 header, body, footer {
 	background-color: #669999;
 }
+
+.col {
+	margin-top: 20px;
+}
