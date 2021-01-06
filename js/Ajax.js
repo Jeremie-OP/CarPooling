@@ -1,5 +1,5 @@
 $(document).ready(function (){
-    $("form").on('submit',function(e){
+    $("#form_search").on('submit',function(e){
        e.preventDefault();
        search();
     });
@@ -11,7 +11,6 @@ function search() {
         url: "wiwiCarAjax.php?action=search",
         data: $("#form_search").serialize(),
         dataType: "html",
-        cache: false,
         success:function(resultat) {
             $("#result").empty().append(resultat);
             if (resultat === "Aucun voyage disponible pour ce trajet") var param = "searchEmpty";
