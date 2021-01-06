@@ -16,6 +16,9 @@ function search() {
             if (resultat === "Aucun voyage disponible pour ce trajet") var param = "searchEmpty";
             else var param = "searchSuccess";
             notif(param);
+        },
+        error:function (resultat) {
+            notif("error");
         }
     });
 }
@@ -28,6 +31,11 @@ function notif(param) {
     }
     if (param === "searchEmpty") {
         $("#notif").text("Aucun résultat trouvé").addClass("bg-warning").slideDown("slow").on('click', function(event) {
+            $("#notif").slideUp("slow");
+        }).delay(3000).slideUp("slow");
+    }
+    if (param === "error") {
+        $("#notif").text("Quelque chose ne s'est pas bien passé !").addClass("bg-danger").slideDown("slow").on('click', function(event) {
             $("#notif").slideUp("slow");
         }).delay(3000).slideUp("slow");
     }
