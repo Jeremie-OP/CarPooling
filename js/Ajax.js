@@ -14,7 +14,8 @@ function search() {
         cache: false,
         success:function(resultat) {
             $("#result").empty().append(resultat);
-            var param = "searchSuccess";
+            if (resultat === "Aucun voyage disponible pour ce trajet") var param = "searchEmpty";
+            else var param = "searchSuccess";
             notif(param);
         }
     });
@@ -22,13 +23,13 @@ function search() {
 
 function notif(param) {
     if (param === "searchSuccess") {
-        $("#notif").text("Recherche effectué avec succès").addClass("bg-primary").show("slow").on('click', function(event) {
-            $("#notif").hide("slow");
-        }).delay(1000).hide("slow");
+        $("#notif").text("Recherche effectué avec succès").addClass("bg-primary").slideDown("slow").on('click', function(event) {
+            $("#notif").slideUp("slow");
+        }).delay(3000).slideUp("slow");
     }
     if (param === "searchEmpty") {
-        $("#notif").text("Aucun résultat trouvé").addClass("bg-warning").show("slow").on('click', function(event) {
-            $("#notif").hide("slow");
-        })
+        $("#notif").text("Aucun résultat trouvé").addClass("bg-warning").slideDown("slow").on('click', function(event) {
+            $("#notif").slideUp("slow");
+        }).delay(3000).slideUp("slow");
     }
 }
