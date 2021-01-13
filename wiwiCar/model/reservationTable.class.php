@@ -17,4 +17,18 @@ class reservationTable
         }
         return $reservation;
     }
+
+    public static function getReservationByVoyageur($voyageur)
+    {
+        $em = dbconnection::getInstance()->getEntityManager();
+
+        $reservationRepository = $em->getRepository('reservation');
+        $reservation = $reservationRepository->findBy(array('voyageur' => $voyageur), array('id'=> 'ASC'));
+
+        if ($reservation == false) {
+            //echo 'Erreur sql';
+        }
+        return $reservation;
+    }
+
 }

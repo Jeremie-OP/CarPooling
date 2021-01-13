@@ -16,6 +16,18 @@ class voyageTable {
         return $voyage;
     }
 
+    public static function getVoyageById($id) {
+        $em = dbconnection::getInstance()->getEntityManager() ;
+
+        $voyageRepository = $em -> getRepository('voyage');
+        $voyage = $voyageRepository->findOneBy(array('id' => $id));
+
+        if ($voyage == false) {
+            return false;
+        }
+        return $voyage;
+    }
+
 }
 
 

@@ -79,13 +79,65 @@ class mainController
         }
     }
 
-    public static function inscription($request, $context) {
+    public static function mesReservations($request, $context) {
+        $reservation = reservationTable::getReservationByVoyageur($context->getSessionAttribute("id"));
+        if ($reservation == false) {
+
+        }
+        $context->result = $reservation;
+        if (!$context->result) {
+            $context->notifMsg = "Vous n'avez aucune reservation.";
+            $context->notif = true;
+        }
         return $context::SUCCESS;
+    }
+
+    public static function disconnect($request, $context) {
+        $context->setSessionAttribute("id", null);
+        $context->setSessionAttribute("identifiant", null);
+        return $context::SUCCESS;
+    }
+
+    public static function login($request, $context) {
+        if (key_exists("login", $request) && key_exists("password", $request)) {
+            $user = utilisateurTable::getUserByLoginAndPass($request["login"], $request["password"]);
+            if ($user == false) {
+                $context->message = "Mauvais login/mot de passe";
+                return $context::ERROR;
+            }
+            $context->setSessionAttribute("id", $user->id);
+            $context->setSessionAttribute("identifiant", $user->identifiant);
+            return $context::SUCCESS;
+        }
+        $context->message = "Login/mot de passe manquant";
+        return $context::ERROR;
+    }
+
+    public static function reserver($request, $context) {
+        if (key_exists("reservation", $request)) {
+            $voyage = voyageTable::getVoyageById($request['reservation']);
+            if ($voyage->nbplace > 0) {
+
+                 $reservation = new reservation();
+                 $reservation->voyage = $voyage;
+                 $reservation->voyageur = utilisateurTable::getUserById($context->getSessionAttribute("id"));
+                 $context->reservation = $reservation;
+                 $em = dbconnection::getInstance()->getEntityManager();
+                 $em->persist($reservation);
+                 //$em->flush();
+                 $voyageRepo = $em->getRepository(Voyage::class);
+                 $voyage = $voyageRepo->find($reservation->voyage->id);
+                 $voyage->nbplace--;
+                 $em->flush();
+                 return $context::SUCCESS;
+            }
+        }
+        return $context::ERROR;
     }
 
     public static function signup($request, $context) {
         if (key_exists("login", $request) && key_exists("password", $request)) {
-            if (utilisateurTable::getUserByLogin($request['login'])) {
+            if (utilisateurTable::getUserByLogin($request["login"])) {
                 //notification que le login existe déjà
                 return $context::NONE;
             }
@@ -94,7 +146,7 @@ class mainController
                 $user->nom = $request['nom'];
                 $user->prenom = $request['prenom'];
                 $user->identifiant = $request['login'];
-                $user->pass = $request['password'];
+                $user->pass = sha1($request['password']);
                 $context->user = $user;
                 //$em = dbconnection::getInstance()->getEntityManager();
                 //$em->persist($user);

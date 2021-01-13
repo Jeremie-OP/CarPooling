@@ -9,6 +9,8 @@
             <label for="prenom">Prénom</label>
             <input type="text" class="form-control" id="prenom" name="prenom">
         </div>
+    </div>
+    <div class="row">
         <div class="col">
             <label for="login">Identifiant</label>
             <input type="text" class="form-control" id="login" name="login">
