@@ -13,7 +13,7 @@ class reservationTable
         $reservation = $reservationRepository->findBy(array('voyage' => $voyage));
 
         if ($reservation == false) {
-            echo 'Erreur sql';
+
         }
         return $reservation;
     }

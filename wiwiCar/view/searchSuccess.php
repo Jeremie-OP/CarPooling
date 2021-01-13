@@ -1,4 +1,4 @@
-<h5>Vous cherchez un voyage ? Saisissez votre trajet !</h5>
+<br><h5>Vous cherchez un voyage ? Saisissez votre trajet !</h5>
 <form id="form_search" method="get">
     <input id="action" type="hidden" name="action" value="result">
     <div class="form-group">
@@ -27,5 +27,6 @@
     </div>
     <button id="submit_search" type="submit" class="btn btn-primary" method="get">Submit</button>
 </form>
+<br>
 
 

@@ -1,0 +1,1 @@
+<div id="succes" class="container text-white" style="display: none">Votre compte a bien été créé !</div>

@@ -1,2 +1,1 @@
-succes
-<?php echo"j'ai ça:".$context->reservation->voyage->depart; ?>
+<div id="succes" class="container text-white" style="display: none">Votre reservation a bien été créé !</div>

@@ -1,1 +1,1 @@
-erreur
+<div id="erreur" class="container text-white" style="display: none">Votre reservation a subit une erreur.</div>

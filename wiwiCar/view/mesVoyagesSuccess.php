@@ -1,13 +1,6 @@
 <?php if ($context->notif) echo $context->notifMsg;
 else {
     ?>
-    <div class="alert alert-primary">
-        <?php
-            echo "<b>".count($context->result)."</b> résultats trouvés pour <b>".$context->trajet->depart."</b>-><b>".$context->trajet->arrivee."</b>";
-        ?>
-    </div>
-
-    <form id="search_list" method="get">
         <input id="action" type="hidden" name="action" value="reserver">
         <table class="table table-dark">
             <thead>
@@ -18,6 +11,7 @@ else {
                 <th scope="col">Places</th>
                 <th scope="col">Conducteur</th>
                 <th scope="col">Contraintes</th>
+                <th scope="col">Voyageurs</th>
             </tr>
             </thead>
             <tbody>
@@ -30,13 +24,18 @@ else {
                 echo "\t<td>" . $value->nbplace . "</td>\n";
                 echo "\t<td>" . $value->conducteur->prenom . " " . $value->conducteur->nom . "</td>\n";
                 echo "\t<td>" . $value->contraintes . "</td>\n";
-                if ($context->getSessionAttribute("identifiant") && $value->nbplace > 0 ) {
-                    echo "\t<td><a><button type=\"submit\" id=\"reservation_button\" name=\"reservation\" class=\"btn btn-outline-success\" value='".$value->id."'>Reserver</button></a></td>\n";
+                echo "\t<td>";
+                if (isset($value->reservation)) {
+                    foreach ($value->reservation as $reservation) {
+                        echo $reservation->voyageur->nom." ".$reservation->voyageur->prenom." | ";
+                    }
                 }
-                echo "</tr>";
+                else {
+                    echo "Aucun voyageur.";
+                }
+                echo "</td>\n</tr>";
             }
             ?>
             </tbody>
         </table>
-    </form>
 <?php }; ?>

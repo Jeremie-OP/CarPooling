@@ -67,16 +67,39 @@ class mainController
     public static function result($request, $context) {
         if (key_exists("depart", $request) && key_exists("arrivee", $request)) {
             $trajet = trajetTable::getTrajet($request['depart'],$request['arrivee']);
+            if (!$trajet) return $context::ERROR;
             $context->result = voyageTable::getVoyageByTrajet($trajet);
             if (!$context->result) {
                 $context->notifMsg = "Aucun voyage disponible pour ce trajet";
                 $context->notif = true;
             }
+            $context->trajet = $trajet;
             return $context::SUCCESS;
         }
         else {
             return $context::ERROR;
         }
+    }
+
+    public static function propVoyage($request, $context) {
+        $context->tableData = trajetTable::getVilles();
+        return $context::SUCCESS;
+    }
+
+    public static function createVoyage($request, $context) {
+        $trajet = trajetTable::getTrajet($request['depart_create'],$request['arrivee_create']);
+        if (!isset($trajet)) return $context::ERROR;
+        $voyage = new voyage();
+        $voyage->trajet = $trajet;
+        $voyage->conducteur = utilisateurTable::getUserById($context->getSessionAttribute("id"));
+        $voyage->contraintes = $request['contraintes'];
+        $voyage->tarif = $trajet->distance*$request['tarif'];
+        $voyage->heuredepart = $request['heure'];
+        $voyage->nbplace = $request['nb_voyageur'];
+        $em = dbconnection::getInstance()->getEntityManager();
+        $em->persist($voyage);
+        $em->flush();
+        return $context::SUCCESS;
     }
 
     public static function mesReservations($request, $context) {
@@ -91,6 +114,24 @@ class mainController
         }
         return $context::SUCCESS;
     }
+
+    public static function mesVoyages($request, $context) {
+        $voyages = voyageTable::getVoyageByConducteur($context->getSessionAttribute("id"));
+        if (!isset($voyages)) {
+            return $context::ERROR;
+        }
+        $context->result = $voyages;
+        if ($context->result) {
+            foreach ($context->result as $voyage) {
+                $voyage->reservation = reservationTable::getReservationByVoyage($voyage->id);
+            }
+        }
+        else {
+            $context->notifMsg = "Vous n'avez aucun voyage.";
+            $context->notif = true;
+        }
+        return $context::SUCCESS;
+}
 
     public static function disconnect($request, $context) {
         $context->setSessionAttribute("id", null);
@@ -148,9 +189,9 @@ class mainController
                 $user->identifiant = $request['login'];
                 $user->pass = sha1($request['password']);
                 $context->user = $user;
-                //$em = dbconnection::getInstance()->getEntityManager();
-                //$em->persist($user);
-                //$em->flush();
+                $em = dbconnection::getInstance()->getEntityManager();
+                $em->persist($user);
+                $em->flush();
                 return $context::SUCCESS;
             }
         }

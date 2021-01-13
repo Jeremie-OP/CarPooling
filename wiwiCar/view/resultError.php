@@ -1,1 +1,1 @@
-
+<div id="erreur" class="container text-white" style="display: none">Un probleme a été rencontré</div>

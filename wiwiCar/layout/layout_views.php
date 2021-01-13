@@ -56,21 +56,27 @@
         </div>
     </div>
 
-
+    <div id="ajax" class="container" style="background-color:#3399ff"></div>
     <div id="page_maincontent" class="container" style="background-color:#3399ff">
-        <div class="row">
+
+        <?php if (isset($template_view4)) include($template_view4);
+        else { ?>
+
+
+        <div id="top" class="row">
             <div id="access" class="col">
                 <?php include($template_view3); ?>
             </div>
         </div>
-        <div class="row">
+        <div id="bot" class="row">
             <div id="search" class="col-md">
                 <?php include($template_view2); ?>
             </div>
-            <div id="result" class="col-md p-0 bg-dark">
+            <div id="result" class="col-md bg-dark">
                 <?php include($template_view); ?>
             </div>
         </div>
+        <?php } ?>
     </div>
 </div>
 

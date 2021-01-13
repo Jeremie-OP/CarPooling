@@ -1,1 +1,1 @@
-Deconnexion effectuée avec succes
+<div id="succes" class="container text-white" style="display: none">Deconnexion effectuée avec succès</div>

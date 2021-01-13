@@ -1,0 +1,1 @@
+<div id="succes" class="container text-white">Votre voyage a bien été créé !</div>

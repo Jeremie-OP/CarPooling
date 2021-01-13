@@ -28,6 +28,18 @@ class voyageTable {
         return $voyage;
     }
 
+    public static function getVoyageByConducteur($conducteur) {
+        $em = dbconnection::getInstance()->getEntityManager() ;
+
+        $voyageRepository = $em -> getRepository('voyage');
+        $voyages = $voyageRepository->findBy(array('conducteur' => $conducteur));
+
+        if ($voyages == false) {
+            return false;
+        }
+        return $voyages;
+    }
+
 }
 
 

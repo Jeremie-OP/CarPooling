@@ -3,14 +3,22 @@
 $nameApp = "wiwiCar";
 
 //action par défaut
-$action = "index";
-$action2 = "search";
-$action3 = "index";
+if (!isset($action)) {
+    $action = "index";
+    $action2 = "search";
+    $action3 = "index";
+}
 
+$action4 = null;
+
+if(key_exists("action4", $_REQUEST))
+    $action4 =  $_REQUEST['action4'];
 
 
 if(key_exists("action", $_REQUEST))
-$action =  $_REQUEST['action'];
+    $action =  $_REQUEST['action'];
+if(key_exists("action3", $_REQUEST))
+    $action3 =  $_REQUEST['action3'];
 
 require_once 'lib/core.php';
 require_once $nameApp.'/controller/mainController.php';
@@ -26,6 +34,7 @@ $context->init($nameApp);
 $view = $context->executeAction($action, $_REQUEST);
 $view2 = $context->executeAction($action2, $_REQUEST);
 $view3 = $context->executeAction($action3, $_REQUEST);
+if (isset($action4)) $view4 = $context->executeAction($action4, $_REQUEST);
 
 //traitement des erreurs de bases, reste a traiter les erreurs d'inclusion
 if($view===false)
@@ -39,7 +48,8 @@ elseif($view!=context::NONE)
 	$context->setLayout("layout_views");
 	$template_view = $nameApp."/view/".$action.$view.".php";
 	$template_view2 = $nameApp."/view/".$action2.$view2.".php";
-	$template_view3 = $nameApp."/view/".$action3.$view3.".php";
+    $template_view3 = $nameApp."/view/".$action3.$view3.".php";
+    if (isset($view4)) $template_view4 = $nameApp."/view/".$action4.$view4.".php";
 	include($nameApp."/layout/".$context->getLayout().".php");
 }
 
