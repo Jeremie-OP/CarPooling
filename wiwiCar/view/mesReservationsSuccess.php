@@ -1,6 +1,7 @@
 <?php if ($context->notif) echo $context->notifMsg;
 else {
     ?>
+    <div class="table-responsive">
     <table class="table table-dark">
         <thead>
         <tr>
@@ -26,4 +27,5 @@ else {
         ?>
         </tbody>
     </table>
+    </div>
 <?php }; ?>

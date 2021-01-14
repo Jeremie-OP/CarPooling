@@ -1,6 +1,7 @@
 <?php if ($context->notif) echo $context->notifMsg;
 else {
     ?>
+        <div class="table-responsive">
         <input id="action" type="hidden" name="action" value="reserver">
         <table class="table table-dark">
             <thead>
@@ -38,4 +39,5 @@ else {
             ?>
             </tbody>
         </table>
+        </div>
 <?php }; ?>

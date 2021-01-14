@@ -46,7 +46,7 @@
         </span>
             <a class="nav-link" href="wiwiCar.php?action=disconnect"><button type="button" id="disconnect" class="btn flex-d justify-content-end btn-outline-danger">Deconnexion</button></a>
         <?php } else { ?>
-            <button type="button" id="inscription" data-bs-toggle="modal" data-bs-target="#login_modal" class="btn flex-d justify-content-end btn-outline-success">Inscription</button>
+            <button type="button" id="inscription" data-bs-toggle="modal" data-bs-target="#login_modal" class="btn flex-d justify-content-end btn-outline-success">Connexion/Inscription</button>
         <?php } ?>
     </div>
 </nav>

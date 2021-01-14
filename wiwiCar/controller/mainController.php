@@ -70,7 +70,7 @@ class mainController
             if (!$trajet) return $context::ERROR;
             $context->result = voyageTable::getVoyageByTrajet($trajet);
             if (!$context->result) {
-                $context->notifMsg = "Aucun voyage disponible pour ce trajet";
+                $context->notifMsg = "Aucun résultat trouvé.";
                 $context->notif = true;
             }
             $context->trajet = $trajet;

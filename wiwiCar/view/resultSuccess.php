@@ -9,6 +9,7 @@ else {
 
     <form id="search_list" method="get">
         <input id="action" type="hidden" name="action" value="reserver">
+        <div class="table-responsive">
         <table class="table table-dark">
             <thead>
             <tr>
@@ -38,5 +39,6 @@ else {
             ?>
             </tbody>
         </table>
+        </div>
     </form>
 <?php }; ?>

@@ -23,7 +23,7 @@ function search() {
         dataType: "html",
         success:function(resultat) {
             $("#result").empty().append(resultat);
-            if (resultat === "Aucun voyage disponible pour ce trajet") var param = "searchEmpty";
+            if (resultat === "Aucun résultat trouvé.") var param = "searchEmpty";
             else var param = "searchSuccess";
             notif(param);
         },
