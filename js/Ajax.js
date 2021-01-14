@@ -9,10 +9,35 @@ $(document).ready(function () {
     });
     $('#menu').find("a").not("#accueil").click(function (e) {
         var action = this.id;
+        console.log(action);
         e.preventDefault();
         loadView(action);
     });
+    $("#search_list").on('submit', function (e) {
+        e.preventDefault();
+        reserver();
+    });
 });
+
+
+function reserver() {
+    $.ajax({
+        type: "POST",
+        url: "wiwiCarAjax.php",
+        data: $("#search_list").serialize(),
+        dataType: "html",
+        success: function (resultat) {
+            if (resultat === "Erreur") var param = "searchEmpty";
+            else var param = "actionSuccess";
+            loadView("mesReservations");
+            notif(param);
+            console.log(param);
+        },
+        error: function (resultat, statut, erreur) {
+            notif("error");
+        }
+    })
+}
 
 
 function search() {
@@ -30,12 +55,12 @@ function search() {
         error:function (resultat, statut, erreur) {
             notif("error");
         }
-    });
+    })
 }
 
 function voyage_create() {
     $.ajax({
-        type: "GET",
+        type: "POST",
         url: "wiwiCarAjax.php",
         data: $("#voyage_create").serialize(),
         dataType: "html",
@@ -73,5 +98,8 @@ function notif(param) {
     }
     if (param === "error") {
         $("#notif").text("Quelque chose ne s'est pas bien passé !").addClass("bg-danger").slideDown("slow").delay(2000).slideUp("slow").removeClass("bg-danger");
+    }
+    if (param === "actionSuccess") {
+        $("#notif").text("Action effectuée avec succès").addClass("bg-primary").slideDown("slow").delay(2000).slideUp("slow").removeClass("bg-primary");
     }
 }

@@ -7,7 +7,7 @@ else {
         ?>
     </div>
 
-    <form id="search_list" method="get">
+    <form id="search_list" method="POST">
         <input id="action" type="hidden" name="action" value="reserver">
         <div class="table-responsive">
         <table class="table table-dark">
@@ -31,10 +31,11 @@ else {
                 echo "\t<td>" . $value->nbplace . "</td>\n";
                 echo "\t<td>" . $value->conducteur->prenom . " " . $value->conducteur->nom . "</td>\n";
                 echo "\t<td>" . $value->contraintes . "</td>\n";
+                echo "\t<td>";
                 if ($context->getSessionAttribute("identifiant") && $value->nbplace > 0 ) {
-                    echo "\t<td><a><button type=\"submit\" id=\"reservation_button\" name=\"reservation\" class=\"btn btn-outline-success\" value='".$value->id."'>Reserver</button></a></td>\n";
+                    echo "<a><button type=\"submit\" id=\"reservation_button\" name=\"reservation\" class=\"btn btn-outline-success\" value='".$value->id."'>Reserver</button></a>";
                 }
-                echo "</tr>";
+                echo "</td>\n</tr>";
             }
             ?>
             </tbody>

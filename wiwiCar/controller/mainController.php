@@ -165,7 +165,6 @@ class mainController
                  $context->reservation = $reservation;
                  $em = dbconnection::getInstance()->getEntityManager();
                  $em->persist($reservation);
-                 //$em->flush();
                  $voyageRepo = $em->getRepository(Voyage::class);
                  $voyage = $voyageRepo->find($reservation->voyage->id);
                  $voyage->nbplace--;

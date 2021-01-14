@@ -1,7 +1,7 @@
 <form>
     <div class="row">
         <div class="col">
-            <input type="hidden" name="action" value="signup">
+            <input type="hidden" name="action4" value="signup">
             <label for="nom">Nom</label>
             <input type="text" class="form-control" id="nom" name="nom" required>
         </div>
